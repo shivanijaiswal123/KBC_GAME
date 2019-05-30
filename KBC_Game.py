@@ -1,54 +1,61 @@
-from random import randint
-questions = [
-    "1.How many continents are there?",              # pehla question
-    "2.What is the capital of India?",            # doosra question
-    "3.NG mei kaun se course padhaya jaata hai?"    # teesra question
+question_list = [
+	"How many continents are there?",  			# pehla question
+	"What is the capital of India?",			# doosra question
+	"NG mei kaun se course padhaya jaata hai?"	# teesra question
 ]
 
-options= [
-    #pehle question ke liye options
-    ["1. Four", "2. Nine", "3. Seven", "4. Eight"],
-    #second question ke liye options
-    ["1. Chandigarh", "2. Bhopal", "3. Chennai", "4. Delhi"],
-    #third question ke liye options
-    ["1. Software Engineering", "2. Counseling", "3. Tourism", "Agriculture"]
+options_list = [
+	#pehle question ke liye options
+	["Four", "Nine", "Seven", "Eight"],
+	#second question ke liye options
+	["Chandigarh", "Bhopal", "Chennai", "Delhi"],
+	#third question ke liye options
+	["Software Engineering", "Counseling", "Tourism", "Agriculture"]
 ]
 
-life_line=["1. Seven",
-"1. Delhi",
-"1. Software Engineering"]
+# har ek question ke liye, uski solution key (yeh index nahi hai)
+solution_list = [3, 4, 1]
 
-options2= [
-    #pehle question ke liye options
-    [ "2. Nine", "3. four", "4. Eight"],
-    #second question ke liye options
-    ["1. Chandigarh", "2. Bhopal", "3. Chennai"],
-    #third question ke liye options
-    [ "2. Counseling", "3. Tourism", "Agriculture"]
-]
+'''print option_list[0]
+print option_list[0][0]
+print option_list[1][1]
+print option_list[1][2]
+print option_list[1][3]'''
 
+count = 0
+one_time = 0
+while count < len(question_list):
+	print question_list[count]
+	counter  = 0
+	number = 1
+	while counter < len(options_list[count]):
+		print number, options_list[count][counter]
+		counter = counter + 1
+		number= number+1
+	user = int(raw_input(" Enter a answer or use lifeline 5050:-  "))
+	if user == 5050 and one_time == 1:
+		print "Aready used lifeline"
+		print "~~~~~~~~~~~~~~~~~~~~~~~"
+		user = int(raw_input(" Enter a answer or use lifeline 5050:-  "))
+	elif user == 5050 and one_time == 0:
+		one_time = 1
+		print count+1, options_list[count][count]
+		print solution_list[count], options_list[count][solution_list[count]-1]
+		user = int(raw_input("enter answer"))
 
+		if user == solution_list[count]:
+			print "congrats"
+			print " "
+		else:
+			print "You loose"
+			print "out of the game"
+			break
+	if  user == solution_list[count]:
+		print "congrats"
+		
+	else:
+		print "You loose"
+		print "out of the game"
+		break
+	count = count +1
 
-solutions = [3, 4, 1]
-
-Question=0
-while Question<len(options):
-    print questions[Question]
-    
-    Option=0
-    while Option<=len(options):
-        print "\t",options[Question][Option]
-        Option=Option+1
-        
-    userAnswer=input("enter your ans option\t")
-
-    if userAnswer == solutions[Question]:
-        print "Congrats! Aapka answer sahi hai"
-    elif userAnswer == 5050:
-	print randint(0,3)
-	print life_line[Question]
-        
-    else:
-        print "Sadly aapka javab galat hai."
-    print ' '
-    Question=Question+1
